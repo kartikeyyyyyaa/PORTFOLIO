@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger &amp; Lock</title>
+<meta name="description" content="A clickable prototype of an AI commitment-contract app — refundable stakes, proof, and an AI that diagnoses why you missed a day instead of just nagging.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div>
+      <div class="wordmark"><span class="mark">Ledger &amp; Lock</span></div>
+      <div class="tagline">Don't trust your future self. Make a contract with them.</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-toggle" id="themeToggle" role="group" aria-label="Colour mode">
+        <button type="button" data-mode="light">☀ Light</button>
+        <button type="button" data-mode="system">◐ Auto</button>
+        <button type="button" data-mode="dark">☾ Dark</button>
+      </div>
+      <div class="demo-pill">Prototype · mock currency, no real payments</div>
+    </div>
+  </div>
+
+  <!-- ===================== SETUP WIZARD ===================== -->
+  <div id="setup">
+    <div class="stepper" id="stepper"></div>
+    <div class="card" id="stepCard"></div>
+  </div>
+
+  <!-- ===================== DASHBOARD ===================== -->
+  <div id="dashboard" hidden></div>
+
+  <!-- ===================== REFERENCE ===================== -->
+  <div class="ref-heading">
+    <h2>The rest of the system</h2>
+    <p>Not built into this demo's one flow, but part of the same design — expand any section.</p>
+  </div>
+
+  <details>
+    <summary>Proof Engine — verification levels</summary>
+    <p>Every goal type gets matched to the cheapest verification that's still hard to fake. L0 is a self-report, used for low-stakes or early-trust users. L1 asks for evidence — a photo, screenshot or document. L2 pulls from a connected source: a wearable, GitHub activity, an LMS completion record, GPS for a run. L3 cross-checks two independent signals against each other before accepting a day as verified. L4 brings in a human — usually the accountability partner the user already chose — for the goals proof alone can't settle. The level used isn't fixed per goal; it can step up after a flagged day and step back down as trust builds.</p>
+  </details>
+  <details>
+    <summary>Anti-cheating, without accusation</summary>
+    <p>The system watches for the boring tells: the same photo reused, a duration that isn't physically possible, a location that jumps, a screenshot that looks edited, progress that outpaces every prior session. None of that auto-penalises a fee. A flagged day is marked "verification incomplete" with a short review window, and only a repeated, unresolved pattern escalates — the default assumption stays that the user is telling the truth.</p>
+  </details>
+  <details>
+    <summary>Why a friend or parent holds the money, not the app</summary>
+    <p>India's Promotion and Regulation of Online Gaming Act, 2025 bans online money games that let a platform stake or move money "with an expectation of winning or being enriched" — regardless of whether the game is skill- or chance-based. Rather than design around that line, this product steps outside it entirely: the app never touches, holds, or moves a rupee. A person the user already trusts — a parent, a friend — physically or digitally holds the amount, completely outside any app, and the app's only job is to generate the notice that person acts on and the evidence trail that backs it up. That mirrors what the case brief's own respondents already do — the one who reports every workout to a family WhatsApp group "for accountability" is doing an unstructured version of exactly this. It's a deliberate design choice to avoid becoming a payment or gaming platform at all, not legal advice — a real launch should still get a lawyer's read before scaling.</p>
+  </details>
+  <details>
+    <summary>Commitment Score &amp; reputation</summary>
+    <p>The score in this demo is computed from five visible inputs — completion rate, verification quality (including AI comprehension checks), streak consistency, focus quality from tracked sessions, and a recovery bonus for coming back after a miss — deliberately not a hidden model, because a score that decides how much a user's word is worth has to be able to show its work. Rankings reset each season so one bad month doesn't become a permanent label, and a "Comeback Award" exists specifically to reward recovering from failure, not just avoiding it.</p>
+  </details>
+  <details>
+    <summary>Focus tracking &amp; phone data — what's real here, what needs a native app</summary>
+    <p>The Focus Timer in this demo is genuinely working: it listens for real browser tab-switches and window-blur events while a session runs, and both the per-session timeline and the across-session attention-span trend chart are built from that real, captured data — not simulated. That's an honest proxy for "did you pick up your phone or wander off" while studying at a laptop. What it can't do is read actual phone screen-time or pickup counts, because a website has no access to those OS-level statistics — only a native iOS (Screen Time / Family Controls) or Android (Digital Wellbeing / UsageStatsManager) app can request that permission. A real product would ship a small companion app for that layer; this prototype is upfront about the gap rather than faking phone data.</p>
+  </details>
+  <details>
+    <summary>Voice, payments, and logistics — how this would run on real infrastructure</summary>
+    <p>The speaker icon on each Witness Log entry is a genuine, working preview using the browser's built-in text-to-speech — a small honest stand-in for what a voice rail (like Gnani) would do continuously in production: call you at the time your history says you actually follow through, rather than a notification you can silently dismiss. The Guardian Hold is designed to map onto a real payments-authorization rail (like Pine Labs): a revocable hold on a guardian's payment method — the same mechanism hotels use for security deposits — captured only on confirmed abandonment, never processed by this app directly. The optional "temptation item" lockbox is the logistics angle: a real courier pickup and hold (a Delhivery-style service) at signing, returned automatically on completion. None of the three are wired to real infrastructure in this prototype; the point is that the design already has a specific, plausible home for each.</p>
+  </details>
+  <details>
+    <summary>Business model</summary>
+    <p>Since the app never processes a user's commitment money, revenue has to come from the service around it, not from the money itself: a freemium tier, premium AI coaching (including the comprehension-check and focus-analytics features), a partner marketplace for completion vouchers, and B2B programs for employee wellness or exam-prep cohorts. Nothing here is structured so the company profits when a user fails — it can't, since it was never holding the money to begin with.</p>
+  </details>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

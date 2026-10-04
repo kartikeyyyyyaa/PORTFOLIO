@@ -866,6 +866,59 @@ html.darkroom .frames .big-title .serif { color: #FFE9D6; }
 html.retro .retro-only { display: inline; }
 .vault h2 .serif { color: var(--red); }
 
+/* ---------- Ledger & Lock cover ---------- */
+.cv-ll { background: radial-gradient(120% 90% at 80% 0%, #2A2114 0%, #15120D 60%); color: #F1E9D8; display: grid; place-items: center; }
+.ll { width: min(86%, 520px); display: grid; gap: 14px; }
+.ll-head, .ll-foot { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; color: #A89C84; }
+.ll-head b { color: #F1E9D8; font-weight: 500; font-variant-numeric: tabular-nums; }
+.ll-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+.ll-grid i { aspect-ratio: 1; border-radius: 4px; border: 1px solid rgba(241,233,216,.14); background: rgba(255,255,255,.02); transition: background .35s, border-color .35s, transform .35s var(--ease); position: relative; }
+.ll-grid i.ok { background: #E8B04A; border-color: #E8B04A; transform: scale(.94); }
+.ll-grid i.ok.small { background: linear-gradient(#E8B04A 0 0) center / 62% 62% no-repeat, rgba(232,176,74,.16); border-color: rgba(232,176,74,.6); }
+.ll-grid i.miss { background: rgba(255,74,46,.16); border-color: #FF4A2E; animation: llBlink 1s steps(2) 2; }
+.ll-grid i.miss::after { content: ""; position: absolute; inset: 28%; background: linear-gradient(45deg, transparent 44%, #FF4A2E 45% 55%, transparent 56%), linear-gradient(-45deg, transparent 44%, #FF4A2E 45% 55%, transparent 56%); }
+@keyframes llBlink { 50% { border-color: transparent; } }
+.ll-debrief { border: 1px solid rgba(241,233,216,.14); border-radius: 10px; padding: 14px 16px; background: rgba(255,255,255,.03); opacity: .28; transform: translateY(6px); transition: opacity .5s, transform .5s var(--ease), border-color .5s; }
+.ll-debrief.show { opacity: 1; transform: none; border-color: rgba(232,176,74,.5); }
+.ll-tag { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #E8B04A; }
+.cv-ll .ll-q { max-width: none; margin: 6px 0 10px; font-family: var(--serif); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.2; color: #F1E9D8; }
+.ll-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ll-chips span { font-family: var(--mono); font-size: 10.5px; padding: 4px 9px; border-radius: 99px; border: 1px solid rgba(241,233,216,.2); color: #CFC4AE; transition: background .3s, color .3s, border-color .3s; }
+.ll-chips span.on { background: #E8B04A; border-color: #E8B04A; color: #15120D; }
+.cv-ll .ll-a { max-width: none; margin: 10px 0 0; font-size: 11px; line-height: 1.5; color: #E8B04A; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .6s var(--ease), opacity .6s; }
+.cv-ll .ll-debrief.answered .ll-a { max-height: 80px; opacity: 1; }
+@media (max-width: 600px) { .ll { gap: 8px; width: 88%; } .ll-head, .ll-foot, .ll-chips { display: none; } .ll-grid { grid-template-columns: repeat(15, 1fr); gap: 3px; } .ll-grid i { border-radius: 3px; } .ll-debrief { padding: 8px 10px; } .cv-ll .ll-q { font-size: 13.5px; margin: 3px 0 0; } .cv-ll .ll-a { font-size: 9.5px; margin-top: 5px; } .ll-tag { font-size: 9px; } }
+
+/* ---------- Handwrite cover ---------- */
+.cv-hw { background: radial-gradient(100% 80% at 70% 30%, #2B2722 0%, #161412 70%); display: flex; align-items: center; justify-content: center; gap: clamp(18px, 4vw, 56px); }
+.hw-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 11px; color: #8E877C; width: 170px; flex: none; }
+.hw-steps li { display: flex; gap: 10px; transition: color .4s; }
+.hw-steps li b { font-weight: 500; color: #5E584F; transition: color .4s; }
+.hw-steps li.on { color: #F4EFE6; }
+.hw-steps li.on b { color: #FF4A2E; }
+.cv-hw .hw-frame { position: relative; height: 80%; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.7); background: #FBFAF6; }
+.hw-typed { position: absolute; inset: 0; padding: 9% 8%; background: #FBFAF6; }
+.hw-typed pre { margin: 0; font-family: var(--mono); font-size: clamp(6.5px, .68vw, 10px); line-height: 1.75; color: #2A2A2E; white-space: pre-wrap; }
+.hw-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.hw-scan { clip-path: inset(0 0 100% 0); transition: clip-path 2s cubic-bezier(.5,.1,.4,1); }
+.hw-scan.in { clip-path: inset(0 0 0 0); }
+.hw-ph { opacity: 0; transform: scale(1.06); transition: opacity .8s, transform 1.6s var(--ease); transform-origin: 32% 30%; }
+.hw-ph.in { opacity: 1; transform: scale(1); }
+.hw-ph.in.zoomed { transform: scale(2.1); }
+.hw-pen { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: #FF4A2E; box-shadow: 0 0 12px 2px rgba(255,74,46,.6); opacity: 0; }
+.cv-hw[data-s="1"] .hw-pen { animation: hwPen 2s cubic-bezier(.5,.1,.4,1) forwards; }
+@keyframes hwPen { 0% { top: 0; opacity: 1; } 92% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+@media (max-width: 900px) { .hw-steps { display: none; } }
+.case-cover .cv-hw .hw-frame { height: 90%; }
+
+/* figures inside case studies */
+.cs-fig { margin: 22px 0 0; }
+.cs-fig img { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--line, rgba(0,0,0,.1)); }
+.cs-fig.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cs-fig.two figcaption { grid-column: 1 / -1; }
+.cs-fig figcaption { margin-top: 10px; font-size: 11px; color: var(--mute); }
+.cv-hw .hw-typed pre { background: none; border: 0; padding: 0; margin: 0; color: #2A2A2E; overflow: hidden; border-radius: 0; box-shadow: none; }
+
 </style>
 </head>
 <body>
@@ -950,7 +1003,7 @@ html.retro .retro-only { display: inline; }
     </div>
     <div class="stats" id="stats">
       <div class="stat"><span class="n" data-count="1670" data-dec="0">0</span><span class="k mono">LeetCode contest rating <span class="src">· top 15.65%</span></span></div>
-      <div class="stat"><span class="n" data-count="15" data-dec="0">0</span><span class="k mono">Projects shipped <span class="src">· 4 domains</span></span></div>
+      <div class="stat"><span class="n" data-count="17" data-dec="0">0</span><span class="k mono">Projects shipped <span class="src">· 4 domains</span></span></div>
       <div class="stat"><span class="n" data-count="7" data-dec="0">0</span><span class="k mono">Certifications <span class="src">· Anthropic, Simplilearn, HackerRank</span></span></div>
       <div class="stat"><span class="n" data-count="102519" data-dec="0">0</span><span class="k mono">of 102,519 writes survived kill -9 <span class="src">· walkv</span></span></div>
     </div>
@@ -1272,6 +1325,39 @@ PASS: every acknowledged write survived</pre><p>Plus unit tests under Go’s rac
     ]
   },
   {
+    id: "ledgerlock", title: "Ledger & Lock", sub: "A contract with your future self", cat: "ml", year: "2026",
+    domain: "AI agents · Product", event: "The Ken Case-Build Competition 2026 · Round 3 · team of three", color: "#15120D", featured: true, cover: "ledger",
+    lede: "An AI commitment agent that turns a goal into a signed contract, checks whether the work really happened, and when you miss a day asks why before it does anything else.",
+    facts: [["Competition", "The Ken × Pine Labs"], ["Stage reached", "Round 3, the build round"], ["Money the app holds", "₹0, by design"], ["Missed-day reasons", "7, each handled differently"]],
+    stack: "JavaScript · LLM agent design · Pine Labs AgenticOrg",
+    desc: "AI commitment agent: signed goal contracts, proof levels L0–L4 and a missed-day diagnosis. Team entry, Round 3 of The Ken’s case-build competition.",
+    links: { live: "ledger-lock/" },
+    case: [
+      ["The brief", `<p>The Ken’s 2026 case-build competition asked one question: why do people abandon goals, and what would make them stick? In our interviews the answer kept repeating. One bad week, the streak resets to zero, and missing a day costs nothing, so quitting is free.</p><p>Most apps respond by nagging harder. We wanted an agent that treats a missed day as a signal to understand, not a failure to punish.</p>`],
+      ["What we designed", `<ul><li><b>Commitment engine</b>: a five-clause contract covering the goal, a witness, a stake, a reward and a signature. It generates the full contract text and a message ready to send to your guardian.</li><li><b>Proof engine</b>: verification from L0 (self-report) to L4 (a human witness), choosing the cheapest proof that’s still hard to fake for each goal.</li><li><b>Adaptation engine</b>: on a missed day it asks why (tired, no time, bored, too hard, forgot, didn’t know how to start, or environment) and responds differently to each, e.g. shrinking tomorrow’s session instead of sending another reminder.</li></ul>`],
+      ["The Guardian Hold", `<p>Money at stake works, but India’s Online Gaming Act, 2025 bans platforms that stake or move money on an outcome. So we stepped outside that line completely: a parent or friend holds the stake <i>off the app</i>. The app never touches a rupee. Its only jobs are to produce the notice the guardian acts on and the evidence trail behind it.</p><div class="tbl"><table><tr><th>Who holds the money</th><th>Legal exposure</th></tr><tr><td>The platform</td><td>Inside the 2025 ban</td></tr><tr><td><b>A trusted person, off-app</b></td><td><b>Outside it entirely</b></td></tr></table></div>`],
+      ["The prototype I built", `<ul><li>A clickable end-to-end flow: contract wizard, day-by-day ledger, a live AI debrief and a transparent commitment score.</li><li>A focus timer that really listens for tab and window switches and charts the data. It says plainly that phone screen time would need a native app, instead of faking it.</li><li>A comprehension check with ten retrieval questions, and a “simulate 2 missed days” switch so judges can trigger the diagnose-and-reschedule moment live.</li></ul><p>Try it: <a href="ledger-lock/" target="_blank" rel="noopener">the live prototype ↗</a>.</p>`],
+      ["Rounds", `<div class="tbl"><table><tr><th>Round</th><th>What it took</th></tr><tr><td>1 · The case</td><td>Concept, user research and this prototype</td></tr><tr><td>2 · The Great Rewiring</td><td>Advanced from thousands of entries. Design the agent on Pine Labs, Delhivery and Gnani rails</td></tr><tr><td><b>3 · The build</b></td><td><b>Build the working agent on Pine Labs’ AgenticOrg platform</b></td></tr></table></div><p>A team project with Divya and Ashish Ranjan.</p>`]
+    ]
+  },
+  {
+    id: "handwrite", title: "Handwrite", sub: "Typed text in, a notebook photo out", cat: "tools", year: "2026",
+    domain: "Computer vision · Image synthesis", event: "Personal project · runs fully offline", color: "#1E1B17", featured: true, cover: "handwrite",
+    lede: "Learns your handwriting from a photo of one page, then turns typed notes into pages that look written by hand, down to the crossed-out typos and the phone-camera shadow.",
+    facts: [["Learns from", "One photo of a page"], ["Joined letter pairs", "132 most common"], ["Correction types", "5, with personal habits"], ["Runs", "Locally, nothing uploaded"]],
+    stack: "Python · OpenCV · NumPy · Pillow · Flask",
+    desc: "Handwriting synthesis: learns your letters from a photo, writes with human mistakes, renders a realistic phone photo of a notebook.",
+    links: { note: "Runs locally · demo on request" },
+    img: "img/hw-notebook.jpg",
+    case: [
+      ["The idea", `<p>Handwriting fonts look fake within a line: every “e” is identical, the baseline is perfectly straight and nothing is ever crossed out. Real handwriting is mostly variation. I wanted a page you couldn’t tell apart from one written by hand, in <i>your</i> hand.</p><figure class="cs-fig"><img src="img/hw-styles.jpg" alt="Two generated handwriting styles, neat print and joined cursive" loading="lazy"><figcaption class="mono">Two of the eight built-in styles. Each letter has several versions.</figcaption></figure>`],
+      ["Learning a hand", `<ul><li><b>From a template</b>: print it, fill it in, photograph it. Corner markers let OpenCV straighten the photo and cut out every character and the 132 most common joined pairs.</li><li><b>From any page you’ve written</b>: upload one photo and type what it says. It removes the ruled lines, finds the text lines and words, aligns the strokes to your characters, and measures your slant, size, spacing and ink colour.</li><li>A review grid shows every cut-out letter so bad samples can be removed. Missing characters fall back to a generic style.</li></ul>`],
+      ["Writing like a human", `<p>Every document gets its own habits, chosen at random and kept consistent across its pages:</p><ul><li>Five kinds of correction: struck-out typos, half-written words, single crossed letters, missing letters added above with a ^, and overwritten letters.</li><li>Wavy baselines, a wandering margin, words squeezed at the end of a line, hyphenation, and a hand that tires towards the bottom of the page.</li><li>Ballpoint, gel, fountain and felt pens, each with its own ink flow. The ballpoint even skips.</li></ul>`],
+      ["The camera", `<p>The last step fakes the photo, not just the page. The paper curves into the binding, page edges stack up, writing from the back of the sheet shows through, and the camera adds auto-exposure grey, a hand shadow, noise and JPEG compression. You can also photograph your own blank notebook: click six points per page, and the writing is warped onto the real paper, following its curve and ruled lines.</p><figure class="cs-fig two"><img src="img/hw-scan.jpg" alt="Flat page output" loading="lazy"><img src="img/hw-sheet.jpg" alt="Phone photo of a loose sheet output" loading="lazy"><figcaption class="mono">The same engine: a flat scan, and a simulated phone photo of a loose sheet.</figcaption></figure>`],
+      ["Build", `<p>About 3,100 lines of Python with no ML framework. Pillow and NumPy do the rendering, OpenCV does the glyph extraction and perspective warping, and a small Flask app gives a live-preview editor that re-flows only the pages after your edit. It runs on a laptop with no internet connection.</p>`]
+    ]
+  },
+  {
     id: "splitsync", title: "SplitSync", sub: "Group expenses, settled in fewer moves", cat: "web", year: "2026",
     domain: "Full-stack · Fintech", event: "Built for the Neev AI internship assessment", color: "#EAF0EA", featured: true, cover: "splitsync",
     lede: "A group expense app that categorises spending with a fast regex path and an LLM fallback, then settles debts in the minimum number of transfers.",
@@ -1452,10 +1538,10 @@ const PHOTOS = [
 
 /* ===================== NOW (edit whenever things change) ===================== */
 const NOW = {
-  updated: "Sep 2026",
+  updated: "Oct 2026",
   items: [
     ["Contributing", "Open source in GirlScript Summer of Code ’26, AI / Agents track"],
-    ["Building", "Round 2 of The Ken’s case-build competition: an AI agent that helps people keep commitments"],
+    ["Building", "Round 3 of The Ken × Pine Labs case-build competition: Ledger & Lock, an AI commitment agent, on the AgenticOrg platform"],
     ["Preparing", "Google Summer of Code 2027: picking orgs and reading their codebases"],
     ["Teaching", "Technical sessions and assessments at the GfG student chapter, VIT Bhopal"]
   ]
@@ -1789,6 +1875,93 @@ function coverSplit() {
   }, { still: 5.5 });
 }
 
+
+function coverLedger() {
+  const el = document.createElement("div"); el.className = "cv-ll";
+  const reasons = ["Tired", "No time", "Bored", "Too hard", "Forgot", "Didn’t know how to start", "Environment"];
+  el.innerHTML = `<div class="ll zoom">
+    <div class="ll-head mono"><span>Contract · GATE prep · 2 h/day</span><span>Day <b class="ll-day">01</b> / 30</span></div>
+    <div class="ll-grid">${Array.from({ length: 30 }, (_, i) => `<i data-d="${i}"></i>`).join("")}</div>
+    <div class="ll-debrief">
+      <span class="mono ll-tag">AI debrief</span>
+      <p class="ll-q">Two days missed. Before anything else: what got in the way?</p>
+      <div class="ll-chips">${reasons.map(r => `<span>${r}</span>`).join("")}</div>
+      <p class="ll-a mono">→ Plan adjusted: 2 h becomes 75 min for 3 days, then steps back up. No penalty. Guardian not notified.</p>
+    </div>
+    <div class="ll-foot mono"><span>Guardian Hold · ₹1,000</span><span>held by a parent, never by the app</span></div>
+  </div>`;
+  const cells = $$(".ll-grid i", el), day = $(".ll-day", el), deb = $(".ll-debrief", el), chips = $$(".ll-chips span", el);
+  let k = 0;
+  const step = () => {
+    if (!el.isConnected && k > 0) return;
+    const t = k % 40;
+    if (t === 0) { cells.forEach(c => c.className = ""); deb.className = "ll-debrief"; chips.forEach(c => c.classList.remove("on")); }
+    if (t < 9) cells[t].className = "ok";
+    else if (t < 11) cells[t].className = "miss";
+    else if (t === 12) deb.classList.add("show");
+    else if (t === 15) chips[0].classList.add("on");
+    else if (t === 17) deb.classList.add("answered");
+    else if (t >= 20 && t < 32) cells[t - 9].className = t - 9 < 14 ? "ok small" : "ok";
+    const done = cells.filter(c => c.className).length;
+    day.textContent = pad2(Math.max(1, done));
+    k++;
+  };
+  if (REDUCE) { for (let i = 0; i < 32; i++) step(); } else { step(); setInterval(step, 420); }
+  return el;
+}
+
+function coverHandwrite() {
+  const el = document.createElement("div"); el.className = "cv-hw";
+  const stages = [["01", "typed.txt"], ["02", "your letters"], ["03", "human mistakes"], ["04", "phone photo · sheet"], ["05", "phone photo · notebook"]];
+  el.innerHTML = `<ol class="hw-steps mono">${stages.map(s => `<li><b>${s[0]}</b>${s[1]}</li>`).join("")}</ol>
+    <div class="hw-frame zoom">
+      <div class="hw-typed"><pre># Experiment 1
+## Aim:
+To write a C++ program that demonstrates
+classes and objects by creating a Student
+class which stores the name, registration
+number and marks of a student and
+displays the result.
+
+## Theory:
+A class is a user defined data type that
+binds data members and member functions
+together. An object is an instance of a
+class. Access specifiers such as private,
+public and protected control the
+visibility of the members.
+
+## Code:
+\`\`\`
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student {
+private:
+    string name;
+    int marks[3];</pre></div>
+      <img class="hw-scan" src="img/hw-scan.jpg" alt="Generated handwritten page" loading="lazy">
+      <img class="hw-ph" src="img/hw-sheet.jpg" alt="Generated phone photo of a handwritten sheet" loading="lazy">
+      <img class="hw-ph" src="img/hw-notebook.jpg" alt="Generated phone photo of a handwritten notebook" loading="lazy">
+      <span class="hw-pen" aria-hidden="true"></span>
+    </div>`;
+  const li = $$(".hw-steps li", el), scan = $(".hw-scan", el), ph = $$(".hw-ph", el);
+  let k = 0;
+  const show = () => {
+    const s = k % 5;
+    li.forEach((l, i) => l.classList.toggle("on", i === s));
+    el.dataset.s = s;
+    scan.classList.toggle("in", s >= 1);
+    ph[0].classList.toggle("in", s >= 2);
+    ph[0].classList.toggle("zoomed", s === 2);
+    ph[1].classList.toggle("in", s >= 4);
+  };
+  show();
+  if (REDUCE) { k = 4; show(); } else setInterval(() => { if (!el.isConnected) return; k++; show(); }, 2400);
+  return el;
+}
+
 function makeCover(p) {
   switch (p.cover) {
     case "pw": return coverPW();
@@ -1796,12 +1969,14 @@ function makeCover(p) {
     case "sentinel": return coverSentinel();
     case "walkv": return coverWalkv();
     case "splitsync": return coverSplit();
+    case "ledger": return coverLedger();
+    case "handwrite": return coverHandwrite();
   }
   const d = document.createElement("div"); d.style.background = p.color; return d;
 }
 
 /* ------------------------------------------------------------------ reel */
-const ORDER = ["foolscap", "walkv", "sentinel", "splitsync", "powerwatch"];
+const ORDER = ["foolscap", "walkv", "ledgerlock", "sentinel", "handwrite", "splitsync", "powerwatch"];
 const featured = PROJECTS.filter(p => p.featured).sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
 const track = $("#reelTrack");
 featured.forEach((p, i) => {
@@ -1817,7 +1992,7 @@ featured.forEach((p, i) => {
       <div class="panel-links">
         <button class="pill solid" type="button" data-case="${p.id}">Read case study</button>
         ${p.links.live ? `<a class="pill" href="${p.links.live}" target="_blank" rel="noopener">Live ↗</a>` : ""}
-        ${src ? `<a class="pill" href="${src}" target="_blank" rel="noopener">Source ↗</a>` : `<span class="pill muted">Source soon</span>`}
+        ${src ? `<a class="pill" href="${src}" target="_blank" rel="noopener">Source ↗</a>` : p.links.live ? "" : `<span class="pill muted">${esc(p.links.note || "Source soon")}</span>`}
       </div>
     </div>
     <div class="panel-cover" data-case="${p.id}" data-label="Case study" role="button" tabindex="0" aria-label="Open ${esc(p.title)} case study"></div>`;
@@ -1878,9 +2053,10 @@ $("#caseClose").addEventListener("click", closeCase);
 /* ------------------------------------------------------------------ index */
 const idx = $("#idx"), filters = $("#filters"), peek = $("#peek");
 PROJECTS.forEach((p, i) => {
-  const src = p.id === "walkv" ? (CONFIG.walkvRepo || "#p-walkv") : p.links.src;
+  const src = (p.id === "walkv" ? CONFIG.walkvRepo : p.links.src) || (p.featured ? "#p-" + p.id : p.links.live || "#");
+  const local = src.startsWith("#"), caseAttr = local && p.featured ? ` data-case="${p.id}"` : "";
   const li = document.createElement("li"); li.dataset.cat = p.cat;
-  li.innerHTML = `<a href="${src}" ${src.startsWith("#") ? "" : 'target="_blank" rel="noopener"'} data-peek="${p.id}" data-label="${src.startsWith("#") ? "Case ↑" : "GitHub ↗"}">
+  li.innerHTML = `<a href="${src}" ${local ? "" : 'target="_blank" rel="noopener"'}${caseAttr} data-peek="${p.id}" data-label="${local ? "Case study" : "GitHub ↗"}">
     <span class="i-no">${pad2(i + 1)}</span><span class="i-t">${esc(p.title)}</span><span class="i-d">${esc(p.desc)}</span><span class="i-s">${esc(p.stack)}</span><span class="i-y">${p.year}</span><span class="i-a">↗</span></a>`;
   idx.appendChild(li);
 });
@@ -2590,7 +2766,7 @@ const ext = (u) => () => { if (u) window.open(u, "_blank", "noopener"); };
 /* ---------- "Ask about me": preset questions with saved answers (no API, no key) ---------- */
 const FAQ = [
   { q: "What does Kartikeya do?", a: "He’s a B.Tech CSE student at VIT Bhopal (class of 2029) who works across full-stack apps, machine learning, systems programming in Go, open source and competitive programming. He likes projects where being wrong is expensive, so he measures everything and shows the numbers.", act: [["See his work", () => go("work")()]] },
-  { q: "What has he built?", a: "Five highlights: Foolscap (a Gemini study app with a proof-based revision ledger), walkv (a crash-safe database in Go), Sentinel (a CCTV platform that traces a vehicle across cameras), SplitSync (expense splitting with AI categorisation) and PowerWatch (Delhi electricity-demand forecasting with honest uncertainty). There are 15 projects in total.", act: [["All projects", () => go("index")()]] },
+  { q: "What has he built?", a: "Seven highlights: Foolscap (a Gemini study app with a proof-based revision ledger), walkv (a crash-safe database in Go), Ledger & Lock (an AI commitment agent that reached Round 3 of The Ken’s case-build competition), Sentinel (a CCTV platform that traces a vehicle across cameras), Handwrite (handwriting synthesis that learns your hand from one photo), SplitSync (expense splitting with AI categorisation) and PowerWatch (Delhi electricity-demand forecasting with honest uncertainty). There are " + PROJECTS.length + " projects in total.", act: [["All projects", () => go("index")()]] },
   { q: "Tell me about walkv", a: "walkv is a key-value database he wrote in Go. Every write goes to a checksummed log before it’s acknowledged, so it survives being killed mid-write: 102,519 acknowledged writes, zero lost across five kill -9 rounds. Fixing a pipelining bug took it from 34k to 349k writes a second.", act: [["Read the case study", () => openCase("walkv")], ["Crash it yourself", () => { go("principles")(); setTimeout(() => $("[data-run='crash']").click(), 700); }]] },
   { q: "What experience does he have?", a: "Open-source contributor and ambassador at GirlScript Summer of Code ’26 (AI / Agents track), Platform & Integration Intern at TrustLayerLabs (APIs and backend integration), core member of the GfG student chapter’s technical team at VIT Bhopal, Google Gemini Student Ambassador, and a Google Developer Program member.", act: [["Experience", () => go("experience")()]] },
   { q: "What’s his tech stack?", a: "Languages: Python, C++, Go and TypeScript. He has built with Next.js and React, FastAPI and PostgreSQL/PostGIS, Firebase, Streamlit, YOLOv8 and PaddleOCR for computer vision, the Gemini API, and raw WebGL for interfaces like this site." },
